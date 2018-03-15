@@ -34,6 +34,7 @@ ext.versions = [
         "gson"                      : "2.8.0"           ,
         "retrofit_converter_gson"   : "2.3.0"           ,
         "room"                      : "1.0.0"           ,
+        "picasso"                   : "2.71828"         ,
 ]
 
 dependencies {
@@ -71,4 +72,7 @@ dependencies {
 
     //mockito
     testImplementation "org.mockito:mockito-core:${versions.mockito}"
+
+    //picasso
+    implementation "com.squareup.picasso:picasso:${versions.picasso}"
 }
