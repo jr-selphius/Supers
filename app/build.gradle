@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -20,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+kapt {
+    generateStubs = true
 }
 
 ext.versions = [
@@ -58,6 +64,8 @@ dependencies {
     compile "com.google.dagger:dagger-android:${versions.dagger}"
     compile "com.google.dagger:dagger-android-support:${versions.dagger}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+    compile "com.google.dagger:dagger:${versions.dagger}"
 
     //retrofit2
     compile "com.squareup.retrofit2:retrofit:${versions.retrofit}"
@@ -69,6 +77,7 @@ dependencies {
     //room
     implementation "android.arch.persistence.room:runtime:${versions.room}"
     annotationProcessor "android.arch.persistence.room:compiler:${versions.room}"
+    kapt "android.arch.persistence.room:compiler:${versions.room}"
 
     //mockito
     testImplementation "org.mockito:mockito-core:${versions.mockito}"

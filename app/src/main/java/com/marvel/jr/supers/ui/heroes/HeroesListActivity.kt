@@ -1,32 +1,38 @@
 package com.marvel.jr.supers.ui.heroes
 
-import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.marvel.jr.supers.CustomApplication
 import com.marvel.jr.supers.R
 import com.marvel.jr.supers.model.Superhero
-import com.marvel.jr.supers.ui.BaseActivity
-import com.marvel.jr.supers.ui.detail.HeroDetailActivity
+import com.marvel.jr.supers.navigation.Navigator
 import kotlinx.android.synthetic.main.activity_heroes_list.*
-import java.util.*
+import javax.inject.Inject
 
-class HeroesListActivity : BaseActivity() {
+class HeroesListActivity : AppCompatActivity(), HeroesView {
+
+    @Inject
+    lateinit var navigator: Navigator
+
+    @Inject
+    lateinit var heroesPresenter: HeroesPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_heroes_list)
 
-        val superhero = Superhero(10,"Spiderman", "https://i.annihil.us/u/prod/marvel/i/mg/c/10/537ba5ff07aa4/standard_xlarge.jpg", "peter", "1.80m", "Strength", "Sentido aracnido", "vengadores")
-        val heroesList = Arrays.asList(superhero, superhero, superhero)
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = HeroesAdapter(heroesList) {
-            navigateToDetail(it)
-        }
+        (application as CustomApplication).component.inject(this)
+        heroesPresenter.setView(this)
+
+        heroesPresenter.getSuperheroes()
     }
 
-    private fun navigateToDetail(id: Long) {
-        val intent = Intent(this, HeroDetailActivity::class.java)
-        intent.putExtra(HeroDetailActivity.SUPERHERO_ID, id)
-        startActivity(intent)
+
+    override fun showHeroes(heroes: List<Superhero>) {
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = HeroesAdapter(heroes) {
+            navigator.startDetailActivity(it)
+        }
     }
 }
