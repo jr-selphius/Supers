@@ -2,10 +2,11 @@ package com.marvel.jr.supers.ui.detail
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
 import com.marvel.jr.supers.CustomApplication
 import com.marvel.jr.supers.R
+import com.marvel.jr.supers.extensions.loadImage
 import com.marvel.jr.supers.model.Superhero
+import kotlinx.android.synthetic.main.activity_hero_detail.*
 import javax.inject.Inject
 
 class HeroDetailActivity : AppCompatActivity(), HeroView {
@@ -29,6 +30,13 @@ class HeroDetailActivity : AppCompatActivity(), HeroView {
     }
 
     override fun showHero(hero: Superhero) {
-        Toast.makeText(this, "The id clicked is : ${hero.name}", Toast.LENGTH_LONG).show()
+
+        superheroImage.loadImage(hero.photo)
+        realName.text = hero.realName
+        name.text = hero.name
+        height.text = hero.height
+        groups.text = hero.groups
+        abilities.text = hero.abilities
+        power.text = hero.power
     }
 }

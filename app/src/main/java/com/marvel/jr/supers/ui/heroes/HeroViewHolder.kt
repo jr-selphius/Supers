@@ -11,11 +11,6 @@ class HeroViewHolder(private val view: View, private val itemClick:(Long) -> Uni
     fun bindHero(superhero: Superhero) {
         with(view) {
             name.text = superhero.name
-            realName.text = superhero.realName
-            abilities.text = superhero.height
-            groups.text = superhero.groups
-            power.text = superhero.power
-            meters.text = superhero.height
             photo.loadImage(superhero.photo)
             setOnClickListener {
                 itemClick(superhero.id)
