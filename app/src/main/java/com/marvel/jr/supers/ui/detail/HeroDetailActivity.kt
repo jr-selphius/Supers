@@ -19,6 +19,8 @@ class HeroDetailActivity : AppCompatActivity(), HeroView {
     @Inject
     lateinit var heroDetailPresenter: HeroDetailPresenter
 
+    private var id: Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hero_detail)
@@ -26,7 +28,12 @@ class HeroDetailActivity : AppCompatActivity(), HeroView {
         (application as CustomApplication).component.inject(this)
         heroDetailPresenter.setView(this)
 
-        val id = intent.extras[SUPERHERO_ID] as Long
+        id = intent.extras[SUPERHERO_ID] as Long
+
+        if (savedInstanceState != null) {
+            id = savedInstanceState.getLong(SUPERHERO_ID)
+        }
+
         heroDetailPresenter.getSuperheroById(id)
     }
 
@@ -46,5 +53,10 @@ class HeroDetailActivity : AppCompatActivity(), HeroView {
 
     override fun showHeroNotFound() {
         heroNotFoundMessage.visibility = View.VISIBLE
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putLong(SUPERHERO_ID, id)
+        super.onSaveInstanceState(outState)
     }
 }
