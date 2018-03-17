@@ -30,7 +30,7 @@ public class HeroesPresenterTest {
     @Captor
     ArgumentCaptor<GetSuperheroesUseCase.Callback> captor;
 
-    HeroesPresenter heroesPresenter;
+    private HeroesPresenter heroesPresenter;
 
 
     @Before
@@ -68,5 +68,4 @@ public class HeroesPresenterTest {
         verify(view).hideProgressView();
         verify(view).showHeroes(SOME_SUPERHEROES);
     }
-
 }

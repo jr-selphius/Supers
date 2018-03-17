@@ -2,6 +2,7 @@ package com.marvel.jr.supers.ui.detail
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.marvel.jr.supers.CustomApplication
 import com.marvel.jr.supers.R
 import com.marvel.jr.supers.extensions.loadImage
@@ -37,5 +38,13 @@ class HeroDetailActivity : AppCompatActivity(), HeroView {
         groups.text = hero.groups
         abilities.text = hero.abilities
         power.text = hero.power
+    }
+
+    override fun hideMainContent() {
+        mainContent.visibility = View.GONE
+    }
+
+    override fun showHeroNotFound() {
+        heroNotFoundMessage.visibility = View.VISIBLE
     }
 }

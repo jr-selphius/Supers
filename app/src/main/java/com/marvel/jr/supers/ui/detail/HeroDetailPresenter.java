@@ -21,7 +21,12 @@ public class HeroDetailPresenter {
         getSuperheroByIdUseCase.execute(id, new GetSuperheroByIdUseCase.Callback() {
             @Override
             public void onSuperheroByIdObtained(Superhero superhero) {
-                view.showHero(superhero);
+                if (superhero != null) {
+                    view.showHero(superhero);
+                } else {
+                    view.hideMainContent();
+                    view.showHeroNotFound();
+                }
             }
         });
     }

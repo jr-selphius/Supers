@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Supers</string>
     <string name="no_heroes">There is no heroes!!</string>
+    <string name="hero_not_found">We could not find the hero!</string>
 </resources>

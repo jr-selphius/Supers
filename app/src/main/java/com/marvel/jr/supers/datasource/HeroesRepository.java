@@ -1,7 +1,7 @@
 package com.marvel.jr.supers.datasource;
 
 import com.marvel.jr.supers.datasource.local.LocalDataSource;
-import com.marvel.jr.supers.datasource.remote.RemoteDataSourceImpl;
+import com.marvel.jr.supers.datasource.remote.RemoteDataSource;
 import com.marvel.jr.supers.model.Superhero;
 
 import java.util.List;
@@ -9,9 +9,9 @@ import java.util.List;
 public class HeroesRepository implements HeroesRepositoryDataSource {
 
     private LocalDataSource localDataSource;
-    private RemoteDataSourceImpl remoteDataSource;
+    private RemoteDataSource remoteDataSource;
 
-    public HeroesRepository(LocalDataSource localDataSource, RemoteDataSourceImpl remoteDataSource) {
+    public HeroesRepository(LocalDataSource localDataSource, RemoteDataSource remoteDataSource) {
         this.localDataSource = localDataSource;
         this.remoteDataSource = remoteDataSource;
     }
@@ -22,7 +22,7 @@ public class HeroesRepository implements HeroesRepositoryDataSource {
         List<Superhero> superheroes = localDataSource.getSuperheroes();
         if (superheroes.isEmpty()) {
             superheroes = remoteDataSource.getSuperheroes();
-            if (superheroes != null) {
+            if (superheroes != null && !superheroes.isEmpty()) {
                 localDataSource.addSuperheroes(superheroes);
             }
         }
