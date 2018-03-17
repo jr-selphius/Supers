@@ -3,6 +3,7 @@ package com.marvel.jr.supers.ui.heroes
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.marvel.jr.supers.CustomApplication
 import com.marvel.jr.supers.R
 import com.marvel.jr.supers.model.Superhero
@@ -28,11 +29,22 @@ class HeroesListActivity : AppCompatActivity(), HeroesView {
         heroesPresenter.getSuperheroes()
     }
 
-
     override fun showHeroes(heroes: List<Superhero>) {
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = HeroesAdapter(heroes) {
             navigator.startDetailActivity(it)
         }
+    }
+
+    override fun showEmptyView() {
+        heroesEmptyView.visibility = View.VISIBLE
+    }
+
+    override fun showProgressView() {
+        progress.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressView() {
+        progress.visibility = View.GONE
     }
 }

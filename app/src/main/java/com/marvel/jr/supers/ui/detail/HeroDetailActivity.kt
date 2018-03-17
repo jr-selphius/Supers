@@ -30,7 +30,6 @@ class HeroDetailActivity : AppCompatActivity(), HeroView {
     }
 
     override fun showHero(hero: Superhero) {
-
         superheroImage.loadImage(hero.photo)
         realName.text = hero.realName
         name.text = hero.name

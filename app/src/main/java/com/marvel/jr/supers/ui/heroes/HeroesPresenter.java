@@ -19,10 +19,20 @@ public class HeroesPresenter {
     }
 
     public void getSuperheroes() {
+
+        view.showProgressView();
+
         getSuperheroesUseCase.execute(new GetSuperheroesUseCase.Callback() {
             @Override
             public void onSuperheroesObtained(List<Superhero> superheroes) {
-                view.showHeroes(superheroes);
+
+                view.hideProgressView();
+
+                if (superheroes == null || superheroes.isEmpty()) {
+                    view.showEmptyView();
+                } else {
+                    view.showHeroes(superheroes);
+                }
             }
         });
     }

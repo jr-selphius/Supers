@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Supers</string>
+    <string name="no_heroes">There is no heroes!!</string>
 </resources>

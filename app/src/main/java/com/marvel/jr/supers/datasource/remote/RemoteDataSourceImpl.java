@@ -17,15 +17,14 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
 
     @Override
     public List<Superhero> getSuperheroes() {
-
-        Response<Superheroes> response = null;
-
+        List<Superhero> superheroes = null;
         try {
-            response = service.getSuperheroes().execute();
+            Response<Superheroes> response = service.getSuperheroes().execute();
+            superheroes = response.body().getSuperheroes();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return response.body().getSuperheroes();
+        return superheroes;
     }
 }

@@ -22,7 +22,9 @@ public class HeroesRepository implements HeroesRepositoryDataSource {
         List<Superhero> superheroes = localDataSource.getSuperheroes();
         if (superheroes.isEmpty()) {
             superheroes = remoteDataSource.getSuperheroes();
-            localDataSource.addSuperheroes(superheroes);
+            if (superheroes != null) {
+                localDataSource.addSuperheroes(superheroes);
+            }
         }
 
         return superheroes;
