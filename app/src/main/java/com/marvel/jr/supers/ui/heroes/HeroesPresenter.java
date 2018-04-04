@@ -36,4 +36,8 @@ public class HeroesPresenter {
             }
         });
     }
+
+    public void heroClicked(long id) {
+        view.navigateToDetail(id);
+    }
 }

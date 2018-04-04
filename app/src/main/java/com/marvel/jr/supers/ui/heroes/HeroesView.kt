@@ -7,4 +7,5 @@ interface HeroesView {
     fun showEmptyView()
     fun showProgressView()
     fun hideProgressView()
+    fun navigateToDetail(id: Long)
 }

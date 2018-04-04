@@ -32,7 +32,7 @@ class HeroesListActivity : AppCompatActivity(), HeroesView {
     override fun showHeroes(heroes: List<Superhero>) {
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = HeroesAdapter(heroes) {
-            navigator.startDetailActivity(it)
+            heroesPresenter.heroClicked(it)
         }
     }
 
@@ -46,5 +46,9 @@ class HeroesListActivity : AppCompatActivity(), HeroesView {
 
     override fun hideProgressView() {
         progress.visibility = View.GONE
+    }
+
+    override fun navigateToDetail(id: Long) {
+        navigator.startDetailActivity(id)
     }
 }

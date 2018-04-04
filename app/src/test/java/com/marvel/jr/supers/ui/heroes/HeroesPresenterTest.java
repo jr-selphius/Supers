@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -68,4 +69,13 @@ public class HeroesPresenterTest {
         verify(view).hideProgressView();
         verify(view).showHeroes(SOME_SUPERHEROES);
     }
+
+    @Test
+    public void shouldNavigateToDetailWhenClicked() {
+
+        heroesPresenter.heroClicked(anyLong());
+
+        verify(view).navigateToDetail(anyLong());
+    }
+
 }
