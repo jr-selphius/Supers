@@ -23,7 +23,7 @@ class HeroesListActivity : AppCompatActivity(), HeroesView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_heroes_list)
 
-        (application as CustomApplication).component.inject(this)
+        (application as CustomApplication).createHeroesComponent().inject(this)
         heroesPresenter.setView(this)
 
         heroesPresenter.getSuperheroes()
@@ -50,5 +50,10 @@ class HeroesListActivity : AppCompatActivity(), HeroesView {
 
     override fun navigateToDetail(id: Long) {
         navigator.startDetailActivity(id)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (application as CustomApplication).releaseHeroesComponent()
     }
 }

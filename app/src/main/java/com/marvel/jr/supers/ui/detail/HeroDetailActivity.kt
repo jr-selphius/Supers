@@ -13,7 +13,7 @@ import javax.inject.Inject
 class HeroDetailActivity : AppCompatActivity(), HeroView {
 
     companion object {
-        val SUPERHERO_ID = "SUPERHERO_ID"
+        const val SUPERHERO_ID = "SUPERHERO_ID"
     }
 
     @Inject
@@ -25,7 +25,7 @@ class HeroDetailActivity : AppCompatActivity(), HeroView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hero_detail)
 
-        (application as CustomApplication).component.inject(this)
+        (application as CustomApplication).createHeroDetailComponent().inject(this)
         heroDetailPresenter.setView(this)
 
         id = intent.extras[SUPERHERO_ID] as Long
@@ -58,5 +58,10 @@ class HeroDetailActivity : AppCompatActivity(), HeroView {
     override fun onSaveInstanceState(outState: Bundle?) {
         outState?.putLong(SUPERHERO_ID, id)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (application as CustomApplication).releaseHeroDetailComponent()
     }
 }

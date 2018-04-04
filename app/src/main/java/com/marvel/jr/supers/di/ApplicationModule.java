@@ -85,25 +85,4 @@ public class ApplicationModule {
     public HeroesRepository provideRepository(LocalDataSourceImpl localDataSource, RemoteDataSourceImpl remoteDataSource) {
         return new HeroesRepository(localDataSource, remoteDataSource);
     }
-
-    @Provides
-    public GetSuperheroesUseCase provideGetSuperheroesUseCase(HeroesRepository repo) {
-        return new GetSuperheroesUseCase(repo);
-    }
-
-    @Provides
-    public HeroesPresenter provideHeroesPresenter(GetSuperheroesUseCase getSuperheroesUseCase) {
-        return new HeroesPresenter(getSuperheroesUseCase);
-    }
-
-    @Provides
-    public GetSuperheroByIdUseCase provideGetSuperheroByIdUseCase(HeroesRepository repo) {
-        return new GetSuperheroByIdUseCase(repo);
-    }
-
-    @Provides
-    public HeroDetailPresenter provideHeroDetailPresenter(GetSuperheroByIdUseCase getSuperheroByIdUseCase) {
-        return new HeroDetailPresenter(getSuperheroByIdUseCase);
-    }
-
 }
