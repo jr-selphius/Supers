@@ -1,21 +1,17 @@
-package com.marvel.jr.supers.ui.heroes;
+package com.marvel.jr.supers.screens.heroes.ui;
 
-import com.marvel.jr.supers.domain.GetSuperheroesUseCase;
+import com.marvel.jr.supers.screens.heroes.domain.GetSuperheroesUseCase;
 import com.marvel.jr.supers.model.Superhero;
+import com.marvel.jr.supers.screens.BasePresenter;
 
 import java.util.List;
 
-public class HeroesPresenter {
+public class HeroesPresenter extends BasePresenter<HeroesView> {
 
-    private HeroesView view;
     private GetSuperheroesUseCase getSuperheroesUseCase;
 
     public HeroesPresenter(GetSuperheroesUseCase getSuperheroesUseCase) {
         this.getSuperheroesUseCase = getSuperheroesUseCase;
-    }
-
-    public void setView(HeroesView view) {
-        this.view = view;
     }
 
     public void getSuperheroes() {

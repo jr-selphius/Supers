@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.marvel.jr.supers.ui.heroes.HeroesListActivity">
+    tools:context="com.marvel.jr.supers.screens.heroes.ui.HeroesListActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"

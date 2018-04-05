@@ -1,4 +1,4 @@
-package com.marvel.jr.supers.ui.heroes
+package com.marvel.jr.supers.screens.heroes.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -55,5 +55,6 @@ class HeroesListActivity : AppCompatActivity(), HeroesView {
     override fun onDestroy() {
         super.onDestroy()
         (application as CustomApplication).releaseHeroesComponent()
+        heroesPresenter.release()
     }
 }

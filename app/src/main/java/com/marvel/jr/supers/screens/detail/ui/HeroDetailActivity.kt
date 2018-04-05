@@ -1,4 +1,4 @@
-package com.marvel.jr.supers.ui.detail
+package com.marvel.jr.supers.screens.detail
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +7,7 @@ import com.marvel.jr.supers.CustomApplication
 import com.marvel.jr.supers.R
 import com.marvel.jr.supers.extensions.loadImage
 import com.marvel.jr.supers.model.Superhero
+import com.marvel.jr.supers.screens.detail.ui.HeroDetailPresenter
 import kotlinx.android.synthetic.main.activity_hero_detail.*
 import javax.inject.Inject
 
@@ -63,5 +64,6 @@ class HeroDetailActivity : AppCompatActivity(), HeroView {
     override fun onDestroy() {
         super.onDestroy()
         (application as CustomApplication).releaseHeroDetailComponent()
+        heroDetailPresenter.release()
     }
 }

@@ -1,4 +1,6 @@
-package com.marvel.jr.supers.ui.detail;
+package com.marvel.jr.supers.screens.detail.di;
+
+import com.marvel.jr.supers.screens.detail.HeroDetailActivity;
 
 import dagger.Subcomponent;
 

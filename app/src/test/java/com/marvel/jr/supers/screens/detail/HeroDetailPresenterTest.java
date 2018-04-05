@@ -1,7 +1,8 @@
-package com.marvel.jr.supers.ui.detail;
+package com.marvel.jr.supers.screens.detail;
 
-import com.marvel.jr.supers.domain.GetSuperheroByIdUseCase;
+import com.marvel.jr.supers.screens.detail.domain.GetSuperheroByIdUseCase;
 import com.marvel.jr.supers.model.Superhero;
+import com.marvel.jr.supers.screens.detail.ui.HeroDetailPresenter;
 
 import org.junit.Before;
 import org.junit.Test;

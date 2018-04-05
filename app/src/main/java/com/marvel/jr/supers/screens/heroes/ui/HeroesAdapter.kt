@@ -1,4 +1,4 @@
-package com.marvel.jr.supers.ui.heroes
+package com.marvel.jr.supers.screens.heroes.ui
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

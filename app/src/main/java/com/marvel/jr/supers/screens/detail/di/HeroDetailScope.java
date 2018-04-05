@@ -1,4 +1,4 @@
-package com.marvel.jr.supers.ui.heroes;
+package com.marvel.jr.supers.screens.detail.di;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -7,5 +7,5 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface HeroesScope {
+public @interface HeroDetailScope {
 }

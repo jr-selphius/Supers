@@ -5,10 +5,10 @@ import android.app.Application;
 import com.marvel.jr.supers.di.ApplicationComponent;
 import com.marvel.jr.supers.di.ApplicationModule;
 import com.marvel.jr.supers.di.DaggerApplicationComponent;
-import com.marvel.jr.supers.ui.detail.HeroDetailComponent;
-import com.marvel.jr.supers.ui.detail.HeroDetailModule;
-import com.marvel.jr.supers.ui.heroes.HeroesComponent;
-import com.marvel.jr.supers.ui.heroes.HeroesModule;
+import com.marvel.jr.supers.screens.detail.di.HeroDetailComponent;
+import com.marvel.jr.supers.screens.detail.di.HeroDetailModule;
+import com.marvel.jr.supers.screens.heroes.di.HeroesComponent;
+import com.marvel.jr.supers.screens.heroes.di.HeroesModule;
 
 public class CustomApplication extends Application {
 

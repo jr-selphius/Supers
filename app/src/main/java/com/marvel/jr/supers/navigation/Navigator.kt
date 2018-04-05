@@ -2,7 +2,7 @@ package com.marvel.jr.supers.navigation
 
 import android.content.Context
 import android.content.Intent
-import com.marvel.jr.supers.ui.detail.HeroDetailActivity
+import com.marvel.jr.supers.screens.detail.HeroDetailActivity
 
 class Navigator(private val context: Context) {
 

@@ -10,11 +10,7 @@ import com.marvel.jr.supers.datasource.local.LocalDataSourceImpl;
 import com.marvel.jr.supers.datasource.local.SuperheroDao;
 import com.marvel.jr.supers.datasource.remote.RemoteDataSourceImpl;
 import com.marvel.jr.supers.datasource.remote.SuperheroService;
-import com.marvel.jr.supers.domain.GetSuperheroByIdUseCase;
-import com.marvel.jr.supers.domain.GetSuperheroesUseCase;
 import com.marvel.jr.supers.navigation.Navigator;
-import com.marvel.jr.supers.ui.detail.HeroDetailPresenter;
-import com.marvel.jr.supers.ui.heroes.HeroesPresenter;
 
 import javax.inject.Singleton;
 

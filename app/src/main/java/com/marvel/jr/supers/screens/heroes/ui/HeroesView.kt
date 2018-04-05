@@ -1,4 +1,4 @@
-package com.marvel.jr.supers.ui.heroes
+package com.marvel.jr.supers.screens.heroes.ui
 
 import com.marvel.jr.supers.model.Superhero
 
