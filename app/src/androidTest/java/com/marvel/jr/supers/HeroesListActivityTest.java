@@ -36,4 +36,11 @@ public class HeroesListActivityTest {
         activityRule.launchActivity(null);
     }
 
+    @Test
+    public void status404() {
+        mockWebServerRule.server.enqueue(new MockResponse().setResponseCode(404));
+
+        activityRule.launchActivity(null);
+    }
+
 }

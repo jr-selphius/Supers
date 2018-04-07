@@ -20,7 +20,10 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
         List<Superhero> superheroes = null;
         try {
             Response<Superheroes> response = service.getSuperheroes().execute();
-            superheroes = response.body().getSuperheroes();
+            if (response.isSuccessful()) {
+                superheroes = response.body().getSuperheroes();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
