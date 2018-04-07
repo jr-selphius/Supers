@@ -1,6 +1,5 @@
 package com.marvel.jr.supers;
 
-import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
