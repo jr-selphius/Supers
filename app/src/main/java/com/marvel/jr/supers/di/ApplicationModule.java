@@ -16,6 +16,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -42,11 +43,18 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public SuperheroService provideRetrofit() {
+    public OkHttpClient provideHttpClient() {
+        return new OkHttpClient();
+    }
+
+    @Provides
+    @Singleton
+    public SuperheroService provideRetrofit(OkHttpClient okHttpClient) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://api.myjson.com")
+                .baseUrl(application.getBaseUrl())
+                .client(okHttpClient)
                 .build();
 
         return retrofit.create(SuperheroService.class);

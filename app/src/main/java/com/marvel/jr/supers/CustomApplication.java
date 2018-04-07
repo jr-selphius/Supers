@@ -15,6 +15,11 @@ public class CustomApplication extends Application {
     private ApplicationComponent applicationComponent;
     private HeroDetailComponent heroDetailComponent;
     private HeroesComponent heroesComponent;
+    private String baseUrl = "https://api.myjson.com";
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
 
     public ApplicationComponent getApplicationComponent() {
         return applicationComponent;

@@ -14,7 +14,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.marvel.jr.supers.CustomTestRunner"
     }
     buildTypes {
         release {
@@ -35,8 +35,11 @@ ext.versions = [
         "mockito"                   : "2.10.0"          ,
         "spresso_core"              : "3.0.1"           ,
         "test_runner"               : "1.0.1"           ,
+        "okhttp3_idling_resource"   : "1.0.0"           ,
+        "mockwebserver"             : "3.10.0"          ,
         "dagger"                    : "2.11"            ,
         "retrofit"                  : "2.3.0"           ,
+        "okhttp"                    : "3.10.0"          ,
         "gson"                      : "2.8.0"           ,
         "retrofit_converter_gson"   : "2.3.0"           ,
         "room"                      : "1.0.0"           ,
@@ -59,6 +62,13 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:${versions.test_runner}"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${versions.spresso_core}"
 
+    //okhttp idling resource
+    androidTestImplementation "com.jakewharton.espresso:okhttp3-idling-resource:${versions.okhttp3_idling_resource}"
+    androidTestCompile 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+
+    //mockwebserver
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:${versions.mockwebserver}"
+
     //dagger2
     implementation "com.google.dagger:dagger:${versions.dagger}"
     annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger}"
@@ -69,6 +79,9 @@ dependencies {
 
     //retrofit2
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+
+    //okhttp
+    implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
 
     //gson
     implementation "com.google.code.gson:gson:${versions.gson}"
