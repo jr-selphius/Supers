@@ -13,6 +13,8 @@ import okhttp3.mockwebserver.MockResponse;
 
 public class HeroesListActivityTest {
 
+    private static final String MALFORMED_JSON = "malformed json";
+
     @Rule
     public ActivityTestRule<HeroesListActivity> activityRule = new ActivityTestRule<>(HeroesListActivity.class, true, false);
 
@@ -38,7 +40,16 @@ public class HeroesListActivityTest {
 
     @Test
     public void status404() {
+
         mockWebServerRule.server.enqueue(new MockResponse().setResponseCode(404));
+
+        activityRule.launchActivity(null);
+    }
+
+    @Test
+    public void malformedJson() {
+
+        mockWebServerRule.server.enqueue(new MockResponse().setBody(MALFORMED_JSON));
 
         activityRule.launchActivity(null);
     }
