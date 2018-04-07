@@ -42,7 +42,7 @@ ext.versions = [
         "okhttp"                    : "3.10.0"          ,
         "gson"                      : "2.8.0"           ,
         "retrofit_converter_gson"   : "2.3.0"           ,
-        "room"                      : "1.0.0"           ,
+        "room"                      : "1.1.0-beta2"     ,
         "picasso"                   : "2.71828"         ,
 ]
 
@@ -63,8 +63,8 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${versions.spresso_core}"
 
     //okhttp idling resource
-    androidTestImplementation "com.jakewharton.espresso:okhttp3-idling-resource:${versions.okhttp3_idling_resource}"
-    androidTestCompile 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+    implementation "com.jakewharton.espresso:okhttp3-idling-resource:${versions.okhttp3_idling_resource}"
+    implementation "com.android.support.test.espresso.idling:idling-concurrent:3.0.1"
 
     //mockwebserver
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:${versions.mockwebserver}"
@@ -76,6 +76,7 @@ dependencies {
     compile "com.google.dagger:dagger-android-support:${versions.dagger}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
 
     //retrofit2
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"

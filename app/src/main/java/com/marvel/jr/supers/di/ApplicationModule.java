@@ -2,7 +2,10 @@ package com.marvel.jr.supers.di;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.support.test.espresso.IdlingRegistry;
 
+import com.jakewharton.espresso.OkHttp3IdlingResource;
+import com.marvel.jr.supers.BuildConfig;
 import com.marvel.jr.supers.CustomApplication;
 import com.marvel.jr.supers.datasource.HeroesRepository;
 import com.marvel.jr.supers.datasource.local.AppDatabase;
@@ -44,7 +47,11 @@ public class ApplicationModule {
     @Provides
     @Singleton
     public OkHttpClient provideHttpClient() {
-        return new OkHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        if (BuildConfig.DEBUG) {
+            IdlingRegistry.getInstance().register(OkHttp3IdlingResource.create("okhttp", okHttpClient));
+        }
+        return okHttpClient;
     }
 
     @Provides
