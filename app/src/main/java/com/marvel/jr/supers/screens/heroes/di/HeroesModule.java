@@ -1,5 +1,7 @@
 package com.marvel.jr.supers.screens.heroes.di;
 
+import com.marvel.jr.supers.UseCaseHandler;
+import com.marvel.jr.supers.UseCaseThreadPoolScheduler;
 import com.marvel.jr.supers.datasource.HeroesRepository;
 import com.marvel.jr.supers.screens.heroes.domain.GetSuperheroesUseCase;
 import com.marvel.jr.supers.screens.heroes.ui.HeroesPresenter;
@@ -16,7 +18,7 @@ public class HeroesModule {
     }
 
     @Provides
-    public HeroesPresenter provideHeroesPresenter(GetSuperheroesUseCase getSuperheroesUseCase) {
-        return new HeroesPresenter(getSuperheroesUseCase);
+    public HeroesPresenter provideHeroesPresenter(UseCaseHandler useCaseHandler, GetSuperheroesUseCase getSuperheroesUseCase) {
+        return new HeroesPresenter(useCaseHandler, getSuperheroesUseCase);
     }
 }

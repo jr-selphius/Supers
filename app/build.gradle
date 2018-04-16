@@ -29,7 +29,7 @@ kapt {
 }
 
 ext.versions = [
-        "support_lib"               : "27.1.0"          ,
+        "support_lib"               : "27.1.1"          ,
         "constraint_layout"         : "1.0.2"           ,
         "junit"                     : "4.12"            ,
         "mockito"                   : "2.10.0"          ,
@@ -60,7 +60,9 @@ dependencies {
     testImplementation "junit:junit:${versions.junit}"
 
     androidTestImplementation "com.android.support.test:runner:${versions.test_runner}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:${versions.spresso_core}"
+    implementation "com.android.support.test.espresso:espresso-core:${versions.spresso_core}"
+
+    androidTestImplementation('com.android.support.test.espresso:espresso-contrib:2.2.1')
 
     //okhttp idling resource
     implementation "com.jakewharton.espresso:okhttp3-idling-resource:${versions.okhttp3_idling_resource}"

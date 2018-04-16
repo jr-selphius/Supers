@@ -1,18 +1,12 @@
 package com.marvel.jr.supers.screens.heroes.domain;
 
-import android.os.Handler;
-import android.os.Looper;
-
+import com.marvel.jr.supers.UseCase;
 import com.marvel.jr.supers.datasource.HeroesRepository;
 import com.marvel.jr.supers.model.Superhero;
 
 import java.util.List;
 
-public class GetSuperheroesUseCase {
-
-    public interface Callback {
-        void onSuperheroesObtained(List<Superhero> superheroes);
-    }
+public class GetSuperheroesUseCase extends UseCase<GetSuperheroesUseCase.RequestValue, GetSuperheroesUseCase.ResponseValue> {
 
     private final HeroesRepository heroesRepository;
 
@@ -20,20 +14,24 @@ public class GetSuperheroesUseCase {
         this.heroesRepository = heroesRepository;
     }
 
-    public void execute(final Callback callback) {
-        new Thread(new Runnable() {
-            @Override public void run() {
-                getSuperheroes(callback);
-            }
-        }).start();
+    @Override
+    protected void executeUseCase(RequestValue requestValues) {
+        List<Superhero> superheroes = heroesRepository.getSuperheroes();
+        getUseCaseCallback().onSuccess(new ResponseValue(superheroes));
     }
 
-    private void getSuperheroes(final Callback callback) {
-        final List<Superhero> superheroes = heroesRepository.getSuperheroes();
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override public void run() {
-                callback.onSuperheroesObtained(superheroes);
-            }
-        });
+    public static final class RequestValue implements UseCase.RequestValues { }
+    public static final class ResponseValue implements UseCase.ResponseValue {
+
+        private List<Superhero> superheroes;
+
+        public ResponseValue(List<Superhero> superheroes) {
+            this.superheroes = superheroes;
+        }
+
+        public List<Superhero> getSuperheroes() {
+            return superheroes;
+        }
+
     }
 }

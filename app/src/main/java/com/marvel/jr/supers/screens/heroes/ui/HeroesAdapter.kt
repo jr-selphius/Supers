@@ -7,7 +7,11 @@ import android.view.ViewGroup
 import com.marvel.jr.supers.R
 import com.marvel.jr.supers.model.Superhero
 
-class HeroesAdapter(private val heroesList: List<Superhero>, private val heroClick: (Long) -> Unit) : RecyclerView.Adapter<HeroViewHolder>() {
+class HeroesAdapter(private var heroesList: List<Superhero>, private val heroClick: (Long) -> Unit) : RecyclerView.Adapter<HeroViewHolder>() {
+
+    fun swapHeroes(heroesList: List<Superhero>) {
+        this.heroesList = heroesList
+    }
 
     override fun onBindViewHolder(holder: HeroViewHolder, position: Int) {
         holder.bindHero(heroesList[position])

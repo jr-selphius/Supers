@@ -7,6 +7,8 @@ import android.support.test.espresso.IdlingRegistry;
 import com.jakewharton.espresso.OkHttp3IdlingResource;
 import com.marvel.jr.supers.BuildConfig;
 import com.marvel.jr.supers.CustomApplication;
+import com.marvel.jr.supers.UseCaseHandler;
+import com.marvel.jr.supers.UseCaseThreadPoolScheduler;
 import com.marvel.jr.supers.datasource.HeroesRepository;
 import com.marvel.jr.supers.datasource.local.AppDatabase;
 import com.marvel.jr.supers.datasource.local.LocalDataSourceImpl;
@@ -96,4 +98,17 @@ public class ApplicationModule {
     public HeroesRepository provideRepository(LocalDataSourceImpl localDataSource, RemoteDataSourceImpl remoteDataSource) {
         return new HeroesRepository(localDataSource, remoteDataSource);
     }
+
+    @Provides
+    public UseCaseThreadPoolScheduler provideThreadPoolScheduler() {
+        return new UseCaseThreadPoolScheduler();
+    }
+
+    @Provides
+    @Singleton
+    public UseCaseHandler provideUseCaseHandler(UseCaseThreadPoolScheduler threadPoolScheduler) {
+        return new UseCaseHandler(threadPoolScheduler);
+    }
+
+
 }

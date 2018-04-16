@@ -1,16 +1,10 @@
 package com.marvel.jr.supers.screens.detail.domain;
 
-import android.os.Handler;
-import android.os.Looper;
-
+import com.marvel.jr.supers.UseCase;
 import com.marvel.jr.supers.datasource.HeroesRepository;
 import com.marvel.jr.supers.model.Superhero;
 
-public class GetSuperheroByIdUseCase {
-
-    public interface Callback {
-        void onSuperheroByIdObtained(Superhero superhero);
-    }
+public class GetSuperheroByIdUseCase extends UseCase<GetSuperheroByIdUseCase.RequestValue, GetSuperheroByIdUseCase.ResponseValue> {
 
     private final HeroesRepository heroesRepository;
 
@@ -18,24 +12,36 @@ public class GetSuperheroByIdUseCase {
         this.heroesRepository = heroesRepository;
     }
 
-    public void execute(final long id, final Callback callback) {
-        new Thread(new Runnable() {
-            @Override public void run() {
-                getSuperhero(id, callback);
-            }
-        }).start();
-
-    }
-
-    private void getSuperhero(long id, final Callback callback) {
-        final Superhero superhero = heroesRepository.getSuperhero(id);
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override public void run() {
-                callback.onSuperheroByIdObtained(superhero);
-            }
-        });
-
+    @Override
+    protected void executeUseCase(RequestValue requestValues) {
+        Superhero superhero = heroesRepository.getSuperhero(requestValues.getId());
+        getUseCaseCallback().onSuccess(new ResponseValue(superhero));
     }
 
 
+    public static final class RequestValue implements UseCase.RequestValues {
+
+        private long id;
+
+        public RequestValue(long id) {
+            this.id = id;
+        }
+
+        public long getId() {
+            return id;
+        }
+    }
+
+    public static final class ResponseValue implements UseCase.ResponseValue {
+
+        private Superhero superhero;
+
+        public ResponseValue(Superhero superhero) {
+            this.superhero = superhero;
+        }
+
+        public Superhero getSuperhero() {
+            return superhero;
+        }
+    }
 }

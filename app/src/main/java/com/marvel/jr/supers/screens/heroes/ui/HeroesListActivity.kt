@@ -9,6 +9,7 @@ import com.marvel.jr.supers.R
 import com.marvel.jr.supers.model.Superhero
 import com.marvel.jr.supers.navigation.Navigator
 import kotlinx.android.synthetic.main.activity_heroes_list.*
+import java.util.*
 import javax.inject.Inject
 
 class HeroesListActivity : AppCompatActivity(), HeroesView {
@@ -19,6 +20,10 @@ class HeroesListActivity : AppCompatActivity(), HeroesView {
     @Inject
     lateinit var heroesPresenter: HeroesPresenter
 
+    private val heroesAdapter = HeroesAdapter(emptyList()) {
+        heroesPresenter.heroClicked(it)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_heroes_list)
@@ -26,14 +31,15 @@ class HeroesListActivity : AppCompatActivity(), HeroesView {
         (application as CustomApplication).createHeroesComponent().inject(this)
         heroesPresenter.setView(this)
 
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = heroesAdapter
+
         heroesPresenter.getSuperheroes()
     }
 
     override fun showHeroes(heroes: List<Superhero>) {
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = HeroesAdapter(heroes) {
-            heroesPresenter.heroClicked(it)
-        }
+        heroesAdapter.swapHeroes(heroes)
+        recycler.adapter.notifyDataSetChanged()
     }
 
     override fun showEmptyView() {
