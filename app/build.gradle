@@ -30,10 +30,12 @@ kapt {
 
 ext.versions = [
         "support_lib"               : "27.1.1"          ,
-        "constraint_layout"         : "1.0.2"           ,
+        "constraint_layout"         : "1.1.0"           ,
         "junit"                     : "4.12"            ,
         "mockito"                   : "2.10.0"          ,
-        "spresso_core"              : "3.0.1"           ,
+        "restmock"                  : "0.3.1"           ,
+        "espresso"                  : "3.0.1"           ,
+        "espresso_contrib"          : "2.2.1"           ,
         "test_runner"               : "1.0.1"           ,
         "okhttp3_idling_resource"   : "1.0.0"           ,
         "mockwebserver"             : "3.10.0"          ,
@@ -58,27 +60,27 @@ dependencies {
     implementation "com.android.support:design:${versions.support_lib}"
 
     testImplementation "junit:junit:${versions.junit}"
-
     androidTestImplementation "com.android.support.test:runner:${versions.test_runner}"
-    implementation "com.android.support.test.espresso:espresso-core:${versions.spresso_core}"
 
-    androidTestImplementation('com.android.support.test.espresso:espresso-contrib:2.2.1')
+    //espresso
+    implementation "com.android.support.test.espresso:espresso-core:${versions.espresso}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${versions.espresso_contrib}"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:${versions.espresso}"
+    implementation "com.android.support.test.espresso.idling:idling-concurrent:${versions.espresso}"
 
     //okhttp idling resource
     implementation "com.jakewharton.espresso:okhttp3-idling-resource:${versions.okhttp3_idling_resource}"
-    implementation "com.android.support.test.espresso.idling:idling-concurrent:3.0.1"
 
-    //mockwebserver
-    androidTestImplementation "com.squareup.okhttp3:mockwebserver:${versions.mockwebserver}"
+    //restmock
+    androidTestImplementation "com.github.andrzejchm.RESTMock:android:${versions.restmock}"
 
     //dagger2
     implementation "com.google.dagger:dagger:${versions.dagger}"
     annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger}"
-    compile "com.google.dagger:dagger-android:${versions.dagger}"
-    compile "com.google.dagger:dagger-android-support:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
-
 
     //retrofit2
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
@@ -95,9 +97,10 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:${versions.room}"
     kapt "android.arch.persistence.room:compiler:${versions.room}"
 
-    //mockito
-    testImplementation "org.mockito:mockito-core:${versions.mockito}"
-
     //picasso
     implementation "com.squareup.picasso:picasso:${versions.picasso}"
+
+    //mockito
+    testImplementation "org.mockito:mockito-core:${versions.mockito}"
+    androidTestImplementation "org.mockito:mockito-android:${versions.mockito}"
 }

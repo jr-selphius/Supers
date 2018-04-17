@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.marvel.jr.supers;
+package com.marvel.jr.supers.domain;
 
 import android.os.Handler;
 import android.support.test.espresso.idling.concurrent.IdlingThreadPoolExecutor;
@@ -33,18 +33,14 @@ public class UseCaseThreadPoolScheduler implements UseCaseScheduler {
 
     private final Handler mHandler = new Handler();
 
-    //public static final int POOL_SIZE = 2;
+    private static final int POOL_SIZE = 2;
+    private static final int MAX_POOL_SIZE = 4;
 
-    //public static final int MAX_POOL_SIZE = 4;
-    public static final int POOL_SIZE = 1;
-    public static final int MAX_POOL_SIZE = 1;
-
-    public static final int TIMEOUT = 30;
+    private static final int TIMEOUT = 30;
 
     private ThreadPoolExecutor mThreadPoolExecutor;
 
     public UseCaseThreadPoolScheduler() {
-        //TODO: provide that as a mocked dependency, because it is registring itself as an idling resource in the production code, which is a bad practice.
         mThreadPoolExecutor = new IdlingThreadPoolExecutor(
                 "asdf",
                 POOL_SIZE,

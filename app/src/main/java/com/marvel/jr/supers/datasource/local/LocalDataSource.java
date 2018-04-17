@@ -8,6 +8,6 @@ import java.util.List;
 public interface LocalDataSource extends RemoteDataSource {
 
     Superhero getSuperhero(Long id);
-    void addSuperheroes(List<Superhero> superheroes);
+    List<Long> addSuperheroes(List<Superhero> superheroes);
 
 }

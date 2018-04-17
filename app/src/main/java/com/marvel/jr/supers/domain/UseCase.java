@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marvel.jr.supers;
+package com.marvel.jr.supers.domain;
 
 /**
  * Use cases are the entry points to the domain layer.

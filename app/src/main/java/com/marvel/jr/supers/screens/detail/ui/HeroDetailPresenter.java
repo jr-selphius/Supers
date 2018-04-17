@@ -1,8 +1,8 @@
 package com.marvel.jr.supers.screens.detail.ui;
 
 
-import com.marvel.jr.supers.UseCase;
-import com.marvel.jr.supers.UseCaseHandler;
+import com.marvel.jr.supers.domain.UseCase;
+import com.marvel.jr.supers.domain.UseCaseHandler;
 import com.marvel.jr.supers.screens.detail.domain.GetSuperheroByIdUseCase;
 import com.marvel.jr.supers.model.Superhero;
 import com.marvel.jr.supers.screens.BasePresenter;

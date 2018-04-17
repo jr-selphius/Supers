@@ -1,9 +1,9 @@
 package com.marvel.jr.supers.screens.heroes;
 
-import com.marvel.jr.supers.UseCase;
-import com.marvel.jr.supers.UseCaseHandler;
-import com.marvel.jr.supers.screens.heroes.domain.GetSuperheroesUseCase;
+import com.marvel.jr.supers.domain.UseCase;
+import com.marvel.jr.supers.domain.UseCaseHandler;
 import com.marvel.jr.supers.model.Superhero;
+import com.marvel.jr.supers.screens.heroes.domain.GetSuperheroesUseCase;
 import com.marvel.jr.supers.screens.heroes.ui.HeroesPresenter;
 import com.marvel.jr.supers.screens.heroes.ui.HeroesView;
 
@@ -17,8 +17,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -20,10 +20,14 @@ public class HeroesRepository implements HeroesRepositoryDataSource {
     public List<Superhero> getSuperheroes() {
 
         List<Superhero> superheroes = localDataSource.getSuperheroes();
+
         if (superheroes.isEmpty()) {
             superheroes = remoteDataSource.getSuperheroes();
             if (superheroes != null && !superheroes.isEmpty()) {
-                localDataSource.addSuperheroes(superheroes);
+                List<Long> ids = localDataSource.addSuperheroes(superheroes);
+                for (int i = 0; i < ids.size(); ++i) {
+                    superheroes.get(i).setId(ids.get(i));
+                }
             }
         }
 
@@ -36,7 +40,7 @@ public class HeroesRepository implements HeroesRepositoryDataSource {
     }
 
     @Override
-    public void addSuperheroes(List<Superhero> superheroes) {
-        localDataSource.addSuperheroes(superheroes);
+    public List<Long> addSuperheroes(List<Superhero> superheroes) {
+        return localDataSource.addSuperheroes(superheroes);
     }
 }

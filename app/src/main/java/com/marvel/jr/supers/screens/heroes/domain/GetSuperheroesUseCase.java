@@ -1,6 +1,6 @@
 package com.marvel.jr.supers.screens.heroes.domain;
 
-import com.marvel.jr.supers.UseCase;
+import com.marvel.jr.supers.domain.UseCase;
 import com.marvel.jr.supers.datasource.HeroesRepository;
 import com.marvel.jr.supers.model.Superhero;
 

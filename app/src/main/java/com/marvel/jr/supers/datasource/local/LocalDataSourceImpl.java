@@ -23,7 +23,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
     }
 
     @Override
-    public void addSuperheroes(List<Superhero> superheroes) {
-        superheroDao.insertAll(superheroes);
+    public List<Long> addSuperheroes(List<Superhero> superheroes) {
+        return superheroDao.insertAll(superheroes);
     }
 }

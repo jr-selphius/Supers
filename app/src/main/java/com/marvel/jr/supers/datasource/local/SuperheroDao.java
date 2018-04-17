@@ -14,7 +14,7 @@ import java.util.List;
 public interface SuperheroDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<Superhero> superheroes);
+    List<Long> insertAll(List<Superhero> superheroes);
 
     @Query("SELECT * FROM superheroes")
     List<Superhero> getAll();
