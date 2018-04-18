@@ -7,16 +7,21 @@ import android.support.test.espresso.IdlingRegistry;
 import com.jakewharton.espresso.OkHttp3IdlingResource;
 import com.marvel.jr.supers.BuildConfig;
 import com.marvel.jr.supers.CustomApplication;
-import com.marvel.jr.supers.domain.UseCaseHandler;
-import com.marvel.jr.supers.domain.UseCaseThreadPoolScheduler;
 import com.marvel.jr.supers.datasource.HeroesRepository;
 import com.marvel.jr.supers.datasource.local.AppDatabase;
 import com.marvel.jr.supers.datasource.local.LocalDataSourceImpl;
 import com.marvel.jr.supers.datasource.local.SuperheroDao;
 import com.marvel.jr.supers.datasource.remote.RemoteDataSourceImpl;
 import com.marvel.jr.supers.datasource.remote.SuperheroService;
+import com.marvel.jr.supers.domain.UseCaseHandler;
+import com.marvel.jr.supers.domain.UseCaseThreadPoolScheduler;
 import com.marvel.jr.supers.navigation.Navigator;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -57,12 +62,18 @@ public class ApplicationModule {
     }
 
     @Provides
+    @Named("url")
+    public String provideEndpoint() {
+        return "https://api.myjson.com";
+    }
+
+    @Provides
     @Singleton
-    public SuperheroService provideRetrofit(OkHttpClient okHttpClient) {
+    public SuperheroService provideRetrofit(OkHttpClient okHttpClient, @Named("url") String endpoint) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(application.getBaseUrl())
+                .baseUrl(endpoint)
                 .client(okHttpClient)
                 .build();
 
@@ -100,8 +111,22 @@ public class ApplicationModule {
     }
 
     @Provides
-    public UseCaseThreadPoolScheduler provideThreadPoolScheduler() {
-        return new UseCaseThreadPoolScheduler();
+    public ThreadPoolExecutor provideThreadPoolExecutor() {
+
+        final int POOL_SIZE = 2;
+        final int MAX_POOL_SIZE = 4;
+        final int TIMEOUT = 30;
+
+        return new ThreadPoolExecutor(
+                POOL_SIZE,
+                MAX_POOL_SIZE,
+                TIMEOUT,
+                TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(POOL_SIZE));
+    }
+
+    @Provides
+    public UseCaseThreadPoolScheduler provideThreadPoolScheduler(ThreadPoolExecutor threadPoolExecutor) {
+        return new UseCaseThreadPoolScheduler(threadPoolExecutor);
     }
 
     @Provides

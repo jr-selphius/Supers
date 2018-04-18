@@ -7,13 +7,14 @@ import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
+import com.marvel.jr.supers.CustomApplication;
 import com.marvel.jr.supers.R;
+import com.marvel.jr.supers.TestApplicationModule;
+import com.marvel.jr.supers.di.ApplicationComponent;
+import com.marvel.jr.supers.model.Superhero;
+import com.marvel.jr.supers.screens.heroes.ui.HeroesListActivity;
 import com.marvel.jr.supers.screens.utils.recyclerview.RecyclerViewInteraction;
 import com.marvel.jr.supers.screens.utils.recyclerview.RecyclerViewWithContentIdlingResource;
-import com.marvel.jr.supers.TestCustomApplication;
-import com.marvel.jr.supers.model.Superhero;
-import com.marvel.jr.supers.screens.detail.HeroDetailActivity;
-import com.marvel.jr.supers.screens.heroes.ui.HeroesListActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -24,13 +25,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import io.appflate.restmock.RESTMockServer;
+import it.cosenonjaviste.daggermock.DaggerMockRule;
 import okhttp3.mockwebserver.MockResponse;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.intent.Intents.intended;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -47,19 +47,32 @@ public class HeroesListActivityTest {
     private final Superhero superhero = new Superhero(10, "Spiderman", "https://i.annihil.us/u/prod/marvel/i/mg/9/30/538cd33e15ab7/standard_xlarge.jpg", "Peter Benjamin Parker", "1.77m", "Peter can cling to most surfaces, has superhuman strength (able to lift 10 tons optimally) and is roughly 15 times more agile than a regular human.", "Peter is an accomplished scientist, inventor and photographer.", "Avengers, formerly the Secret Defenders, New Fantastic Four, the Outlaws\"");
     private final List<Superhero> superheroes = Arrays.asList(superhero, superhero, superhero);
 
+    @Rule public DaggerMockRule<ApplicationComponent> daggerRule =
+            new DaggerMockRule<>(ApplicationComponent.class, new TestApplicationModule(
+                    (CustomApplication) InstrumentationRegistry.getInstrumentation()
+                    .getTargetContext()
+                    .getApplicationContext())).set(
+                        new DaggerMockRule.ComponentSetter<ApplicationComponent>() {
+                            @Override public void setComponent(ApplicationComponent component) {
+                                CustomApplication app =
+                                        (CustomApplication) InstrumentationRegistry.getInstrumentation()
+                                                .getTargetContext()
+                                                .getApplicationContext();
+                                app.setApplicationComponent(component);
+                            }
+                        });
+
     @Rule
     public ActivityTestRule<HeroesListActivity> activityRule = new ActivityTestRule<>(HeroesListActivity.class, true, false);
 
     @Before
     public void setUp() {
-        TestCustomApplication app = (TestCustomApplication) InstrumentationRegistry.getTargetContext().getApplicationContext();
-        app.setBaseUrl(RESTMockServer.getUrl());
         RESTMockServer.reset();
     }
 
     @After
     public void tearDown() {
-        TestCustomApplication app = (TestCustomApplication) InstrumentationRegistry.getTargetContext().getApplicationContext();
+        CustomApplication app = (CustomApplication) InstrumentationRegistry.getTargetContext().getApplicationContext();
         app.getApplicationComponent().getRoomDatabase().clearAllTables();
     }
 
@@ -135,8 +148,6 @@ public class HeroesListActivityTest {
 
         onView(withId(R.id.recycler)).
                 perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-
-        intended(hasComponent(HeroDetailActivity.class.getName()));
     }
 
     private void startActivity() {

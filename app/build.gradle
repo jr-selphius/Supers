@@ -14,7 +14,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "com.marvel.jr.supers.CustomTestRunner"
+        testInstrumentationRunner "io.appflate.restmock.android.RESTMockTestRunner"
     }
     buildTypes {
         release {
@@ -40,6 +40,7 @@ ext.versions = [
         "okhttp3_idling_resource"   : "1.0.0"           ,
         "mockwebserver"             : "3.10.0"          ,
         "dagger"                    : "2.11"            ,
+        "daggermock"                : "0.8.4"           ,
         "retrofit"                  : "2.3.0"           ,
         "okhttp"                    : "3.10.0"          ,
         "gson"                      : "2.8.0"           ,
@@ -81,6 +82,9 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    //daggermock
+    androidTestImplementation "com.github.fabioCollini.daggermock:daggermock:${versions.daggermock}"
 
     //retrofit2
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"

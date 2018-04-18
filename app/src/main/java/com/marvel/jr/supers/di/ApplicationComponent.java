@@ -19,6 +19,5 @@ public interface ApplicationComponent {
     void inject(Application target);
     HeroDetailComponent plus(HeroDetailModule heroDetailModule);
     HeroesComponent plus(HeroesModule heroesModule);
-    OkHttpClient getOkHttpClient();
     AppDatabase getRoomDatabase();
 }

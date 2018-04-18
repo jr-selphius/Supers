@@ -1,6 +1,7 @@
 package com.marvel.jr.supers;
 
 import android.app.Application;
+import android.support.annotation.VisibleForTesting;
 
 import com.marvel.jr.supers.di.ApplicationComponent;
 import com.marvel.jr.supers.di.ApplicationModule;
@@ -15,11 +16,6 @@ public class CustomApplication extends Application {
     private ApplicationComponent applicationComponent;
     private HeroDetailComponent heroDetailComponent;
     private HeroesComponent heroesComponent;
-    private String baseUrl = "https://api.myjson.com";
-
-    public String getBaseUrl() {
-        return baseUrl;
-    }
 
     public ApplicationComponent getApplicationComponent() {
         return applicationComponent;
@@ -34,6 +30,11 @@ public class CustomApplication extends Application {
                 .build();
 
         applicationComponent.inject(this);
+    }
+
+    @VisibleForTesting
+    public void setApplicationComponent(ApplicationComponent applicationComponent) {
+        this.applicationComponent = applicationComponent;
     }
 
     public HeroDetailComponent createHeroDetailComponent() {
